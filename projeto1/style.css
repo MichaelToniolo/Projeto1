@@ -1,0 +1,11 @@
+div{
+    display: flex;
+}
+div input{
+    border: none;
+    border-bottom: 1px solid #590fe4;
+}
+div img{
+    width: 18px;
+    cursor: pointer;
+}

@@ -10,9 +10,10 @@ $resultado = mysqli_query($link, $sql);
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UAtestedbompatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LISTA USUARIOS</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
@@ -28,13 +29,12 @@ $resultado = mysqli_query($link, $sql);
             ?>
                 <tr>
                     <td><?= $tbl[1] ?></td>
-                    <td><a href="alterausuario.php?id=<?= $tbl[0] ?>"></a></td>
-            </tr>
+                    <td><a href="alterausuario.php?id=<?= $tbl[0] ?>"><input type="button" value="ALTERAR"></a></td>
+                </tr>
             <?php
             }
             ?>
         </table>
     </div>
 </body>
-
 </html>

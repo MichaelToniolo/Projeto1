@@ -1,6 +1,6 @@
 <?php
 $servidor = "localhost";
-$banco = "projeto1";
-$usuario = "";
-$senha = "";
+$banco = "projeto";
+$usuario = "admin";
+$senha = "123";
 $link = mysqli_connect($servidor,$usuario,$senha,$banco);
