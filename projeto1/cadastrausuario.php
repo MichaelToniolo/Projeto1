@@ -4,14 +4,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
     include("conectadb.php");
 
-    if ($nome == ($sql = "SELECT * from usuario where usu_nome == '$nome'")) {
-        echo "EXECUTOU IF";
+    //Verifica se usuario ja existente
+    $sql = "SELECT COUNT(usu_id) from usuario WHERE usu_nome = '$nome'";
+
+    $resultado = mysqli_query($link,$sql);
+    while($tbl = mysqli_fetch_array($resultado)){
+        $cont = $tbl[0];
     }
-    /*$sql = "INSERT INTO usuario (usu_nome, usu_senha) values ('$nome','senha')";
-    mysqli_query($link,$sql);
+
+    if($cont==1){
+        echo"<script>window.alert('Usuario já Cadastrado!');</script>";
+    }else{
+       $sql = "INSERT INTO usuario (usu_nome, usu_senha) values ('$nome','senha')";
+        mysqli_query($link,$sql);
+        header("Location: listausuarios.php");
+    }
+
     
-    header("Location: listausuarios.php");*/
-    exit;
+
+    
 }
 ?>
 
@@ -22,14 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./stylecadastra.css">
     <!--<script src="main.js"></script>-->
     <title>CADASTRA USUARIO</title>
 </head>
 
 <body>
-    <div>
-        </form>
+    <div class="container">
 
         <!-- SCRIPT PARA MOSTRAR SENHA-->
         <script>
@@ -45,14 +55,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- FIM SCRIPT PARA MOSTRAR SENHA-->
 
         <form action="cadastrausuario.php" method="POST">
-
+            <h1>Cadastro de Usuário</h1>
             <input type="text" name="nome" id="nome" placeholder="Nome">
             <p> </p>
             <input id="senha" type="password" placeholder="Password">
             <img onclick="mostrarsenha()" src="assets/eye.svg" alt="">
             <p></p>
             <input type="submit" name="cadastrar" id="cadastrar" value="CADASTRAR">
-
 
         </form>
 

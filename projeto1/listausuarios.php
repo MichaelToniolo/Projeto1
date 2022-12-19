@@ -13,11 +13,11 @@ $resultado = mysqli_query($link, $sql);
     <meta http-equiv="X-UAtestedbompatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LISTA USUARIOS</title>
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div>
+    <div class="container">
         <table border="1">
             <tr>
                 <th>NOME</th>
