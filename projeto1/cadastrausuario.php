@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Verifica se usuario ja existente
     $sql = "SELECT COUNT(usu_id) from usuario WHERE usu_nome = '$nome'";
-
     $resultado = mysqli_query($link,$sql);
     while($tbl = mysqli_fetch_array($resultado)){
         $cont = $tbl[0];
@@ -18,11 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        $sql = "INSERT INTO usuario (usu_nome, usu_senha) values ('$nome','senha')";
         mysqli_query($link,$sql);
         header("Location: listausuarios.php");
-    }
-
-    
-
-    
+    }    
 }
 ?>
 
@@ -53,16 +48,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         </script>
         <!-- FIM SCRIPT PARA MOSTRAR SENHA-->
-
+        
         <form action="cadastrausuario.php" method="POST">
             <h1>Cadastro de Usuário</h1>
             <input type="text" name="nome" id="nome" placeholder="Nome">
             <p> </p>
             <input id="senha" type="password" placeholder="Password">
-            <img onclick="mostrarsenha()" src="assets/eye.svg" alt="">
+            <img id="olinho" onclick="mostrarsenha()" src="assets/eye.svg" alt="">
             <p></p>
             <input type="submit" name="cadastrar" id="cadastrar" value="CADASTRAR">
-
         </form>
 
     </div>

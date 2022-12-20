@@ -24,3 +24,10 @@ div img{
     width: 18px;
     cursor: pointer;
 }
+
+#olinho {
+    position: relative;
+    top: 6px;
+    left: -31px;
+
+}

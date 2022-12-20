@@ -13,7 +13,7 @@ $resultado = mysqli_query($link, $sql);
     <meta http-equiv="X-UAtestedbompatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LISTA USUARIOS</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@ $resultado = mysqli_query($link, $sql);
         <table border="1">
             <tr>
                 <th>NOME</th>
-                <th>ALTERAR</th>
+                <th>ALTERAR SENHA</th>
                 <th>EXCLUIR</th>
             </tr>
             <?php
