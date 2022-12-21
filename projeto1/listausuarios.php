@@ -21,7 +21,7 @@ $resultado = mysqli_query($link, $sql);
         <table border="1">
             <tr>
                 <th>NOME</th>
-                <th>ALTERAR SENHA</th>
+                <th>ALTERAR DADOS</th>
                 <th>EXCLUIR</th>
             </tr>
             <?php
