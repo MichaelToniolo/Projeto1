@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($cont==1){
         echo"<script>window.alert('Usuario já Cadastrado!');</script>";
     }else{
-       $sql = "INSERT INTO usuario (usu_nome, usu_senha) values ('$nome','senha')";
+       $sql = "INSERT INTO usuario (usu_nome, usu_senha) values ('$nome','$senha')";
         mysqli_query($link,$sql);
         header("Location: listausuarios.php");
     }    
