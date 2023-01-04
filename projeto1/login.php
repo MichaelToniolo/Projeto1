@@ -1,23 +1,20 @@
 <?php
 if ($_SERVER['REQUEST_METHOD']== 'POST'){
     $nome = $_POST['nome'];
-    $senha = $_POST['senha'];
+    $password = $_POST['password'];
     include("conectadb.php");
 
-    $sql = "SELECT COUNT(usu_id) from usuario WHERE usu_nome = '$nome' AND usu_senha = '$senha'";
+    $sql = "SELECT COUNT(usu_id) from usuario WHERE usu_nome = '$nome' AND usu_senha = '$password'";
     $resultado = mysqli_query($link,$sql);
     while($tbl = mysqli_fetch_array($resultado)){
         $cont = $tbl[0];
         
     }
     if($cont==1){
-        //echo"<script>window.alert('USUARIO OU SENHA INCORRETOS!');</script>";
-        echo($sql);
+        header("Location: listausuarios.php");
     }
     else{
-        //header("Location: listausuarios.php");
-        echo($cont);
-        echo($sql);
+        echo"<script>window.alert('USUARIO OU SENHA INCORRETOS!');</script>";
 
     }
 }
@@ -53,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD']== 'POST'){
             <h1>LOGIN DE USUARIO</h1>
             <input type="text" name="nome" id="nome" placeholder="Nome">
             <p></p>
-            <input id="senha" type="password" name="senha" placeholder="Password">
+            <input id="password" type="password" name="password" placeholder="Password">
             <img id="olinho" onclick="mostrarsenha()" src="assets/eye.svg" alt="">
             <p></p>
             <input type="submit" name="login" id="login" value="LOGIN">
