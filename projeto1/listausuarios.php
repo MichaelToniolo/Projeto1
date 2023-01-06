@@ -17,6 +17,9 @@ $resultado = mysqli_query($link, $sql);
 </head>
 
 <body>
+    <a href="login.php"><input type="button" id="menulogin" value="LOGIN"></a>
+    <a href="cadastrausuario.php"><input type="button" id="menucadastra" value="CADASTRA USUARIO"></a>
+
     <div class="container">
         <table border="1">
             <tr>

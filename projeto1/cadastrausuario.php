@@ -28,13 +28,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./stylecadastra.css">
+    <!--<link rel="stylesheet" href="./stylecadastra.css">-->
+    <link rel="stylesheet" href="estilo.css">
     <!--<script src="main.js"></script>-->
     <title>CADASTRA USUARIO</title>
 </head>
 
 <body>
+<a href="listausuarios.php"><input type="button" id="voltar" value="VOLTAR LISTA USUARIOS"></a>
+
     <div class="container">
+
 
         <!-- SCRIPT PARA MOSTRAR SENHA-->
         <script>
