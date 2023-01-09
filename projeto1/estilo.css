@@ -9,6 +9,7 @@ body {
 
 div {
     padding: 50px;
+    
 }
 
 table {
@@ -23,7 +24,7 @@ table tr th {
 
 table tr th,
 table tr td {
-    padding: 6px;
+    padding: 10px;
 }
 
 table tr td a {
@@ -32,10 +33,10 @@ table tr td a {
     font-weight: bolder;
     font-size: 1.1em;
 }
-
+/*  ESTE RECURSO ELIMINA VARIAÇÃO DE CORES EM LINHAS
 table tr:nth-of-type(odd) td {
-    background-color: #eee;
-}
+    background-color: rgb(255, 0, 0);
+}*/
 
 form {
     border: #fff 3px solid;

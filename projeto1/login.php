@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD']== 'POST'){
         
     }
     if($cont==1){
-        header("Location: listausuarios.php");
+        header("Location: homesistema.html");
     }
     else{
         echo"<script>window.alert('USUARIO OU SENHA INCORRETOS!');</script>";

@@ -17,9 +17,7 @@ $resultado = mysqli_query($link, $sql);
 </head>
 
 <body>
-    <a href="login.php"><input type="button" id="menulogin" value="LOGIN"></a>
-    <a href="cadastrausuario.php"><input type="button" id="menucadastra" value="CADASTRA USUARIO"></a>
-
+<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div class="container">
         <table border="1">
             <tr>
@@ -33,7 +31,7 @@ $resultado = mysqli_query($link, $sql);
                 <tr>
                     <td><?= $tbl[1] ?></td>
                     <td><a href="alterausuario.php?id=<?= $tbl[0] ?>"><input type="button" value="ALTERAR"></a></td>
-                    <td><a href="excluirusuario.php?id=<?=$tbl[0]?>"><input type="button" value="EXCLUIR"></a></td>            
+                    <td><a href="excluirusuario.php?id=<?= $tbl[0] ?>"><input type="button" value="EXCLUIR"></a></td>
                 </tr>
             <?php
             }
@@ -41,4 +39,5 @@ $resultado = mysqli_query($link, $sql);
         </table>
     </div>
 </body>
+
 </html>

@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-<a href="listausuarios.php"><input type="button" id="voltar" value="VOLTAR LISTA USUARIOS"></a>
+<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
 
     <div class="container">
 
