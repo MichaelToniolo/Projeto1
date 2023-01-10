@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $sql = "DELETE FROM usuario WHERE usu_id = $id";
     mysqli_query($link,$sql);
     header("Location: listausuarios.php");
-    echo($sql);
+    
     exit();
 }
 

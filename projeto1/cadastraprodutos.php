@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $produto = $_POST["produto"];
+    $nome = $_POST["nome"];
     $descricao = $_POST["descricao"];
     $categoria = $_POST["categoria"];
     $img1 = $_POST['img1'];
@@ -12,10 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($img1 == "") $img1 = "semimg.gif";
     if ($img1 == "") $img2 = "semimg.gif";
 
-    $sql = "INSERT INTO produto(pro_nome,pro_estoque,pro_preco,pro_descricao,pro_categoria) values ('$nome','$estoque','$preco','$descricao','$categoria')";
+    $sql = "INSERT INTO produtos(pro_nome,pro_estoque,pro_preco,img1,img2,pro_descricao,pro_categoria) values ('$nome','$estoque','$preco','$img1','$img2','$descricao','$categoria')";
     mysqli_query($link, $sql);
     header("Location: listaprodutos.php");
     exit();
+    
 }
 ?>
 
@@ -36,13 +37,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div>
         <form action="cadastraprodutos.php" method="POST">
             <label>NOME</label>
-            <input type="text" name="nome" maxlength="25" required>
+            <input type="text" name="nome" maxlength="25">
+            <br><br>
+            <label>DESCRICAO</label>
+            <input type="text" name="descricao" maxlength="25">
+            <br><br>
+            <label>CATEGORIA</label>
+            <input type="text" name="categoria" maxlength="25">
             <br><br>
             <label>IMAGEM I</label>
             <input type="file" name="file1" id="img1" onchange="foot1()">
+            <img src="img/semimg.gif" width="50px" id="foto1a">
             <br><br>
-            <label>IMAGEM I</label>
+            <label>IMAGEM II</label>
             <input type="file" name="file2" id="img2" onchange="foot2()">
+            <img src="img/semimg.gif" width="50px" id="foto1a">
             <br><br>
             <label>ESTOQUE</label>
             <input type="number" name="estoque" min="0" required>
@@ -55,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </body>
-<script>
+<script> 
     function foto1() {
         document.getElementbyID("foto1a").src = "img/" + (document.getElementById(img1).value).slice(12);
     }
