@@ -4,19 +4,20 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $id=$_POST['id'];
     $nome=$_POST['nome'];
     $descricao=$_POST['descricao'];
-    $categoria=$_POST['categoria'];
+    $preco=$_POST['preco'];
+    $quantidade=$_POST['quantidade'];
     $foto1=$_POST['file1'];
     $foto_old=$_POST['foto_old1'];
     $foto2=$_POST['file2'];
     $foto_old=$_POST['foto_old2'];
-    $estoque=$_POST['estoque'];
-    $preco=$_POST['preco'];
+    
     
     if($img1=="") $img1 = $foto_old1;
     if($img2=="") $img2 = $foto_old2;
-    $sql = "UPDATE produtos SET pro_nome=pro_nome='$nome',pro_descricao='$descricao',pro_categoria='$categoria',img1='$img1',img2='$img2',pro_estoque='$estoque',pro_preco='$preco' WHERE pro_id='$id'";
+    $sql = "UPDATE produtos SET pro_nome=pro_nome='$nome',pro_descricao='$descricao',pro_categoria='$categoria',img1='$img1',img2='$img2',pro_quantidade='$quantidade',pro_preco='$preco' pro_ativo = '$ativo' WHERE pro_id='$id'";
     mysqli_query($link,$sql);
-    header("Location:listaprodutos.php");
+    header("Location: listaproduto.php");
+    echo"<script>window.alert('PRODUTO ALTERADO!');</script>";
     exit();
 }
 
@@ -25,12 +26,12 @@ $sql = "SELECT * FROM produtos WHERE pro_id = '$id'";
 $resultado = mysqli_query($link,$sql);
 while($tbl=mysqli_fetch_array($resultado)){
     $nome = $tbl[1];
-    $descricao=$tbl[4];
-    $categoria=$tbl[5];
+    $descricao = $tbl[2];
+    $quantidade = $tbl[3];
+    $preco = $tbl[4];
+    $ativo = $tbl[5];
     $img1=$tbl[6];
     $img2=$tbl[7];
-    $estoque=$tbl[2];
-    $preco=$tbl=[3];
 }
 ?>
 
@@ -44,34 +45,26 @@ while($tbl=mysqli_fetch_array($resultado)){
     <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <div>
-        <form action="alterarproduto.php" method="post">
-            <input type="hidden" value="<?$id?>" name="id">
-            <label>PRODUTO</label>
-            <input type="text" name="nome" value="<?=$nome?>" maxlength="25" required>
-            <label>DESCRICAO</label>
-            <input type="text" name="descricao" value="<?=$descricao?>" maxlength="25" required>
-            <label>CATEGORIA</label>
-            <input type="text" name="categoria" value="<?=$categoria?>" maxlength="25" required>
-            <label>IMAGEM 1</label>
-            <input type="file" name="img1" value="<?=$img1?>" onchange="foto1()">
-            <img src="img/<?=$foto1?>" width="50px" id="foto1a">
-            <input type="hidden" name="foto_old1" value="<?=$foto1?>">
-            <label>IMAGEM 2</label>
-            <input type="file" name="img2" value="<?=$img2?>" onchange="foto2()">
-            <img src="img/<?=$foto2?>" width="50px" id="foto2a">
-            <input type="hidden" name="foto_old2" value="<?=$foto2?>">
-            <br><br>
-            <label>ESTOQUE</label>
-            <input type="number" value="<?=$estoque?>" name="estoque" min="0" required>
-            <br><br>
+<div>
+        <form action="alteraproduto.php" method="post">
+            <input type="hidden" name="id" value="<?=$id?>">
+            <label>NOME</label>
+            <input type="text" name="nome", value="<?=$nome?>" required>
+            <label>DESCRIÇÃO</label>
+            <input type="text" name="descricao", value="<?=$descricao?>" required>
+            <label>QUANTIDADE</label>
+            <input type="number" name="quantidade", value="<?=$quantidade?>" required>
             <label>PRECO</label>
-            <input type="number" name="preco" value="<?=$preco?>" min="0" step="0.01" required>
-            <br><br>
-            <input type="submit"value="SALVAR">
+            <input type="number" name="preco", value="<?=$preco?>" required>
+            <br></br>
+            <label>STATUS: <?=$check = ($ativo == 's')?"ATIVO":"INATIVO"?></label>
+
+            <input type="radio" name="ativo" value="s" <?=$ativo == "s"?"checked":""?>>ATIVO<br>
+            <input type="radio" name="ativo" value="n" <?=$ativo == "n"?"checked":""?>>INATIVO
+
+            <input type="submit" value="SALVAR">
+
         </form>
     </div>
-  
-
 </body>
 </html>

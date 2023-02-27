@@ -1,22 +1,21 @@
 <?php
+include("conectadb.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $descricao = $_POST["descricao"];
-    $categoria = $_POST["categoria"];
+    $quantidade = $_POST['quantidade'];
+    $preco = $_POST['preco'];
     $img1 = $_POST['img1'];
     $img2 = $_POST['img2'];
-    $estoque = $_POST['estoque'];
-    $preco = $_POST['preco'];
-    include("conectadb.php");
 
     if ($img1 == "") $img1 = "semimg.gif";
     if ($img1 == "") $img2 = "semimg.gif";
 
-    $sql = "INSERT INTO produtos(pro_nome,pro_estoque,pro_preco,img1,img2,pro_descricao,pro_categoria) values ('$nome','$estoque','$preco','$img1','$img2','$descricao','$categoria')";
+    $sql = "INSERT INTO produtos(pro_nome,pro_quantidade,pro_preco,img1,img2,pro_descricao,pro_ativo) values ('$nome','$quantidade','$preco','$img1','$img2','$descricao','s')";
     mysqli_query($link, $sql);
     header("Location: listaprodutos.php");
     exit();
-    
 }
 ?>
 
@@ -32,46 +31,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
-
+    <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
-        <form action="cadastraprodutos.php" method="POST">
+        <form action="cadastraproduto.php" method="post">
             <label>NOME</label>
-            <input type="text" name="nome" maxlength="25">
-            <br><br>
-            <label>DESCRICAO</label>
-            <input type="text" name="descricao" maxlength="25">
-            <br><br>
-            <label>CATEGORIA</label>
-            <input type="text" name="categoria" maxlength="25">
-            <br><br>
-            <label>IMAGEM I</label>
-            <input type="file" name="file1" id="img1" onchange="foot1()">
-            <img src="img/semimg.gif" width="50px" id="foto1a">
-            <br><br>
-            <label>IMAGEM II</label>
-            <input type="file" name="file2" id="img2" onchange="foot2()">
-            <img src="img/semimg.gif" width="50px" id="foto1a">
-            <br><br>
-            <label>ESTOQUE</label>
-            <input type="number" name="estoque" min="0" required>
-            <br><br>
-            <label>PREÇO</label>
-            <input type="number" name="preco" min="0" step="0.01" required>
-            <br><br>
-            <input type="submit" value="SALVAR">
+            <input type="text" name="nome">
+            <br></br>
+            <label>DESCRIÇÃO</label>
+            <input type="text" name="descricao">
+            <br></br>
+            <label>QUANTIDADE</label>
+            <input type="number" name="quantidade">
+            <br></br>
+            <label>PRECO</label>
+            <input type="number" name="preco">
+            <br></br>
+
+            <!-- BLOCO DE CÓDIGO NOVO -->
+
+            <label>IMAGEM</label>
+            <input type="file" name="foto1" id="img1" onchange="foto1()">
+            <img src="img/semfoto.png" width="100px" id="foto1a">
+
+            <br>
+            <input type="submit" value="CADASTRAR">
+
         </form>
+        <script>
+            function foto1() {
+                document.getElementById("foto1a").src = "img/"(document.getElementById("img1").value).slice(12);
+            }
+
+            function foto2() {
+                document.getElementById("foto2a").src = "img/" + (document.getElementById("img2").value).slice(12);
+            }
+        </script>
     </div>
-
 </body>
-<script> 
-    function foto1() {
-        document.getElementbyID("foto1a").src = "img/" + (document.getElementById(img1).value).slice(12);
-    }
-
-    function foto2() {
-        document.getElementById("foto2a").src = "img/" + (document.getElementById("img2").value).slice(12);
-    }
-</script>
 
 </html>
