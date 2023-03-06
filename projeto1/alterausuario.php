@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 }
 
 
-#Coletando ID via Link(URL) exemplo alterausuario.php?id=2 TESTE DE ALTERÇÃO VIA GITHUB
+#Coletando ID via Link(URL) exemplo alterausuario.php?id=2
 $id = $_GET['id'];
 $sql = "SELECT * FROM usuarios WHERE usu_id = $id";
 $resultado = mysqli_query($link, $sql);
@@ -41,6 +41,7 @@ while($tbl = mysqli_fetch_array($resultado)){
     <title>ALTERAR USUARIO</title>
 </head>
 <body>
+<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
         <form action="alterausuario.php" method="post">
         <input type="hidden" name="id" value="<?=$id?>" > <!-- coleta id ao carrega a página de forma oculta-->

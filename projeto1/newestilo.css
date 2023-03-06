@@ -1,5 +1,5 @@
 
-  body {
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -69,7 +69,8 @@
   input[type="text"],
   input[type="password"],
   input[type="number"],
-  input[type="decimal"] {
+  input[type="decimal"],
+  input[type="date"] {
     background-color: #e0dceb;
     border: none;
     border-radius: 3px;
@@ -83,7 +84,7 @@
   }
 
   #olinho {
-    cursor: pointer;#c9c1df
+    cursor: pointer;
     height: 20px;
     margin-left: -25px;
     margin-top: 10px;

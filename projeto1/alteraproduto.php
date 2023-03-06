@@ -1,40 +1,37 @@
 <?php
 include("conectadb.php");
-if($_SERVER['REQUEST_METHOD']=='POST'){
-    $id=$_POST['id'];
-    $nome=$_POST['nome'];
-    $descricao=$_POST['descricao'];
-    $preco=$_POST['preco'];
-    $quantidade=$_POST['quantidade'];
-    #$foto1=$_POST['file1'];
-    #$foto_old=$_POST['foto_old1'];
-    #$foto2=$_POST['file2'];
-    #$foto_old=$_POST['foto_old2'];
-    
-    
-    #if($img1=="") $img1 = $foto_old1;
-    #if($img2=="") $img2 = $foto_old2;
-    #$sql = "UPDATE produtos SET pro_nome=pro_nome='$nome',pro_descricao='$descricao',pro_categoria='$categoria',img1='$img1',img2='$img2',pro_quantidade='$quantidade',pro_preco='$preco' pro_ativo = '$ativo' WHERE pro_id='$id'";
-    $sql = "UPDATE produtos SET pro_nome = '$nome', pro_descricao = '$descricao', pro_quantidade='$quantidade', pro_preco = '$preco', pro_ativo = '$ativo'";
-    mysqli_query($link,$sql);
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+    $quantidade = $_POST['quantidade'];
+    $preco = $_POST['preco'];
+    $ativo = $_POST['ativo'];
+
+    $sql = "UPDATE produtos SET pro_nome = '$nome', pro_descricao = '$descricao', pro_quantidade = '$quantidade', pro_preco = '$preco', pro_ativo = '$ativo' WHERE pro_id = $id";
+    mysqli_query($link, $sql);
+
     header("Location: listaproduto.php");
     echo"<script>window.alert('PRODUTO ALTERADO!');</script>";
-    exit();
+    
 }
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM produtos WHERE pro_id = '$id'";
-$resultado = mysqli_query($link,$sql);
-while($tbl=mysqli_fetch_array($resultado)){
-    $nome = $tbl[1];
-    $descricao = $tbl[2];
-    $quantidade = $tbl[3];
-    $preco = $tbl[4];
+$sql = "SELECT * FROM produtos WHERE pro_id = $id";
+$resultado = mysqli_query($link, $sql);
+
+while($tbl = mysqli_fetch_array($resultado)){
+    $nome = $tbl[4];
+    $descricao = $tbl[1];
+    $quantidade = $tbl[2];
+    $preco = $tbl[3];
     $ativo = $tbl[5];
-    #$img1=$tbl[6];
-    #$img2=$tbl[7];
+
 }
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,11 +39,12 @@ while($tbl=mysqli_fetch_array($resultado)){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALTERA PRODUTO</title>
     <link rel="stylesheet" href="newestilo.css">
+    <title>ALTERAR PRODUTO</title>
 </head>
 <body>
-<div>
+<a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
+    <div>
         <form action="alteraproduto.php" method="post">
             <input type="hidden" name="id" value="<?=$id?>">
             <label>NOME</label>
@@ -56,10 +54,9 @@ while($tbl=mysqli_fetch_array($resultado)){
             <label>QUANTIDADE</label>
             <input type="number" name="quantidade", value="<?=$quantidade?>" required>
             <label>PRECO</label>
-            <input type="decimal" name="preco", value="<?= number_format($preco,2,',','.')?>" required>
+            <input type="number" name="preco", value="<?=$preco?>" required>
             <br></br>
-            <label>STATUS: <?=$check = ($ativo == 's')?"ATIVO":"INATIVO"?></label>
-            <br>
+            <label>STATUS: <?=$check = ($ativo == 's')?"ATIVO":"INATIVO"?></label><br>
 
             <input type="radio" name="ativo" value="s" <?=$ativo == "s"?"checked":""?>>ATIVO<br>
             <input type="radio" name="ativo" value="n" <?=$ativo == "n"?"checked":""?>>INATIVO
