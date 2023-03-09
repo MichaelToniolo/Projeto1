@@ -6,9 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $descricao = $_POST["descricao"];
     $quantidade = $_POST["quantidade"];
     $preco = $_POST["preco"];
-    $foto1 = $_POST["foto1"];
+    #$imagem = $_FILES['imagem'];
+    if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+        $imagem_temp = $_FILES['imagem']['tmp_name'];
+        $imagem = file_get_contents($imagem_temp);
+        $imagem_base64 = base64_encode($imagem);
+    };
     
-
     
     #VERIFICA SE PRODUTO ESTÁ CADASTRADO
     $sql = "SELECT COUNT(pro_id) FROM produtos WHERE pro_nome = '$nome'";
@@ -17,11 +21,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     while ($tbl = mysqli_fetch_array($resultado)) {
         $cont = $tbl[0];
         if ($cont == 0) {
+            /*CÓDIGO DO PAULO NÃO DEU CERTO
+            if($imagem != NULL){
+                #Serializa e salva no banco
+                $nomefinalimg = time().'.jpg';
+                if(move_uploaded_file($imagem['tmp_name'],$nomefinalimg)){
+                    $tamanhoimg = filesize($nomefinalimg);
+                    $mysqlimg = addslashes(fread(fopen($nomefinalimg,"r"),$tamanhoimg));
+                }
+            }    
+            */
             #$sql = "INSERT INTO produtos(pro_nome, pro_descricao, pro_quantidade, pro_preco, pro_ativo, imagem1) VALUES('$nome', '$descricao', '$quantidade', '$preco', 's', '$foto1')";
-            $sql = "INSERT INTO produtos(pro_nome, pro_descricao, pro_quantidade, pro_preco, pro_ativo) VALUES('$nome', '$descricao', '$quantidade', '$preco', 's')";
-
+            $sql = "INSERT INTO produtos(pro_nome, pro_descricao, pro_quantidade, pro_preco, pro_ativo, pro_imagem) VALUES('$nome', '$descricao', '$quantidade', '$preco', 's', '$imagem_base64')";
             mysqli_query($link, $sql);
-            echo($cont);
             header("Location: listaproduto.php");
             exit();
             
@@ -46,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
     <a href="homesistema.html"><input type="button" id="menuhome" value="HOME SISTEMA"></a>
     <div>
-        <form action="cadastraproduto.php" method="post">
+        <form action="cadastraproduto.php" method="post" enctype="multipart/form-data">
             <label>NOME</label>
             <input type="text" name="nome">
             <br></br>
@@ -63,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <!-- BLOCO DE CÓDIGO NOVO -->
             <label>IMAGEM</label>
             <!-- <input type="file" name="foto1" id="img1" onchange="foto1()"> -->
-            <input type="file" name="foto1" id="img1">
-            <img src="img/$foto1.png" width="100px" id="foto1a">
+            <input type="file" name="imagem" id="imagem">
+            <!-- <img src="img" width="100px" id="foto1a"> -->
 
             <br>
             <input type="submit" value="CADASTRAR">

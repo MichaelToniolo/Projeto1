@@ -2,7 +2,7 @@
 #LOCALIZA PC COM BANCO(NOME DO COMPUTADOR)
 $servidor = "localhost";
 #NOME DO BANCO
-$banco = "projetot27";
+$banco = "projeto1";
 #USUARIO DE ACESSO
 $usuario = "admin";
 #SENHA DO USUARIO
