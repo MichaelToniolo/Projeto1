@@ -57,9 +57,10 @@ while($tbl = mysqli_fetch_array($resultado)){
             <input type="number" name="preco", value="<?=$preco?>" required>
             <br></br>
             <label>STATUS: <?=$check = ($ativo == 's')?"ATIVO":"INATIVO"?></label><br>
+            
 
-            <input type="radio" name="ativo" value="s" <?=$ativo == "s"?"checked":""?>>ATIVO<br>
-            <input type="radio" name="ativo" value="n" <?=$ativo == "n"?"checked":""?>>INATIVO
+            <input type="radio" id="ativo"name="ativo" value="s" <?=$ativo == "s"?"checked":""?>><label for="ativo">ATIVO</label><br>
+            <input type="radio" id="inativo" name="ativo" value="n" <?=$ativo == "n"?"checked":""?>>I<label for="inativo">NATIVO<label>
 
             <input type="submit" value="SALVAR">
 
